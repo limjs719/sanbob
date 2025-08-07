@@ -1,0 +1,160 @@
+
+/* Custom styles to enhance Bootstrap and Tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Custom animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-180deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05) rotate(-5deg);
+    }
+    70% {
+        transform: scale(0.9) rotate(5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+    }
+}
+
+/* Number items styling */
+.number-item {
+    @apply relative w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg rounded-xl flex items-center justify-center cursor-pointer transform transition-all duration-300 border-2 border-blue-300 hover:scale-110 hover:shadow-lg;
+    animation: float 3s ease-in-out infinite;
+}
+
+.number-item:nth-child(odd) {
+    animation-delay: -1.5s;
+}
+
+.number-item:hover {
+    @apply from-blue-500 to-blue-700 shadow-xl;
+    animation: glow 1s ease-in-out infinite;
+}
+
+.number-item.selected {
+    @apply from-red-500 to-pink-600 border-red-400 shadow-xl;
+    animation: bounceIn 0.8s ease-out;
+    transform: scale(1.1);
+}
+
+.number-item.selected::after {
+    content: '✓';
+    @apply absolute -top-2 -right-2 bg-green-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold;
+    animation: bounceIn 0.5s ease-out 0.3s both;
+}
+
+/* Selected numbers in result */
+.selected-number {
+    @apply relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-xl md:text-2xl rounded-full flex items-center justify-center shadow-lg transform;
+    animation: bounceIn 0.6s ease-out;
+}
+
+.selected-number::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full;
+    background-size: 200px 200px;
+    background-image: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+    );
+    animation: shimmer 2s infinite;
+}
+
+.selected-number span {
+    @apply relative z-10;
+}
+
+/* Custom button styles */
+.btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 border-0 text-white font-semibold tracking-wide;
+}
+
+.btn-primary:hover {
+    @apply from-blue-700 to-purple-700;
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+    @apply border-2 border-gray-400 text-gray-600 hover:bg-gray-100 hover:border-gray-500;
+}
+
+/* Drawing animation */
+.drawing {
+    @apply text-xl font-semibold text-blue-600;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.drawing::after {
+    content: '●●●';
+    @apply inline-block ml-2;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .number-item {
+        @apply w-12 h-12 text-base;
+    }
+    
+    .selected-number {
+        @apply w-16 h-16 text-lg;
+    }
+}
+
+/* SweetAlert2 custom styling */
+.swal2-popup {
+    @apply rounded-3xl;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.swal2-title {
+    color: white !important;
+}
+
+.swal2-content {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.swal2-confirm {
+    @apply bg-gradient-to-r from-green-500 to-emerald-600 border-0 rounded-full px-8 py-3 font-semibold;
+}
+
+.swal2-cancel {
+    @apply bg-gradient-to-r from-gray-500 to-gray-600 border-0 rounded-full px-8 py-3 font-semibold;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    @apply inline-block w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin ml-2;
+}
